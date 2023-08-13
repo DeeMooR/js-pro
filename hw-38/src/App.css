@@ -1,0 +1,31 @@
+.flex1 {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    background-color: #eee;
+    margin: 30px 0 0 30px;
+}
+.flex1-left {
+    width: 65%;
+}
+.flex1-right {
+    width: 32.5%;
+}
+.flex2 {
+    display: flex;
+}
+.flex2-left {
+    width: 50%;
+}
+.flex2-right {
+    width: 50%;
+}
+
+button {
+    margin: 30px 0 0 30px;
+    width: 140px;
+    height: 40px;
+    font-size: 22px;
+    background-color: #bbb;
+    border-radius: 10px;
+}
