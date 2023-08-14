@@ -1,23 +1,23 @@
-.flex1 {
+.flex-big-small {
     display: flex;
     justify-content: space-between;
     max-width: 1000px;
     background-color: #eee;
     margin: 30px 0 0 30px;
 }
-.flex1-left {
+.flex-big-small__left {
     width: 65%;
 }
-.flex1-right {
+.flex-big-small__right {
     width: 32.5%;
 }
-.flex2 {
+.flex-middle {
     display: flex;
 }
-.flex2-left {
+.flex-middle__left {
     width: 50%;
 }
-.flex2-right {
+.flex-middle__right {
     width: 50%;
 }
 

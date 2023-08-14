@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import Post1 from './components/posts/Post1';
-import Post2 from './components/posts/Post2';
-import Post3 from './components/posts/Post3';
+import Post from './components/Post';
 import './App.css';
 
 function App() {
@@ -23,7 +21,7 @@ function App() {
     const buttonClicked = () => {
         if(!isReceived) {
             fetchPosts();
-            setReceived(prevState => prevState = true);
+            setReceived(true);
         }
         setShowPosts(prevState => !prevState);
     }
@@ -34,20 +32,20 @@ function App() {
             {showPosts ? 'Hide' : 'Show'} posts
         </button>
         {showPosts ?
-            <div className="flex1">
-                <div className="flex1-left">
-                    {posts.length > 0 && <Post1 obj={posts[0]} />}
-                    <div className="flex2">
-                        <div className="flex2-left">
-                            {posts.slice(1, 3).map(i => <Post2 obj={i} />)}
+            <div className="flex-big-small">
+                <div className="flex-big-small__left">
+                    {posts.length > 0 && <Post obj={posts[0]} type='big' />}
+                    <div className="flex-middle">
+                        <div className="flex-middle__left">
+                            {posts.slice(1, 3).map(i => <Post obj={i} type='middle' />)}
                         </div>
-                        <div className="flex2-right">
-                            {posts.slice(3, 5).map(i => <Post2 obj={i} />)}
+                        <div className="flex-middle__right">
+                            {posts.slice(3, 5).map(i => <Post obj={i} type='middle' />)}
                         </div>
                     </div>
                 </div>
-                <div className="flex1-right">
-                    {posts.slice(5).map(i => <Post3 obj={i} />)}
+                <div className="flex-big-small__right">
+                    {posts.slice(5).map(i => <Post obj={i} type='small' />)}
                 </div>
             </div>
         : ''}

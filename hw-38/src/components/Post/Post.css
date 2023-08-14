@@ -1,0 +1,128 @@
+/* ------- For All ------- */
+
+.icons__left, .icons__right {
+    display: flex;
+    align-items: center;
+}
+.like {
+    display: block;
+    background: url('../../icons/like.png') 0 0/cover no-repeat;
+    width: 25px;
+    height: 25px;
+}
+.dislike {
+    display: block;
+    background: url('../../icons/dislike.png') 0 0/cover no-repeat;
+    width: 25px;
+    height: 25px;
+}
+.save {
+    display: block;
+    background: url('../../icons/save.png') 0 0/cover no-repeat;
+    width: 25px;
+    height: 25px;
+}
+.three-dots {
+    display: block;
+    background: url('../../icons/three-dots.png') 0 0/cover no-repeat;
+    width: 25px;
+    height: 25px;
+}
+a {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.post {
+    margin: 30px 10px 0 10px;
+    padding: 0 0 20px 0;
+    border-bottom: 2px solid #888;
+}
+.post__main {
+    display: flex;
+}
+.post__icons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 0 0;
+    height: 20px;
+}
+img {
+    width: 100%;
+}
+
+/* ------- post-big ------- */
+
+.post-big {
+    padding: 0 0 30px 0;
+}
+.post-big__information {
+    width: 60%;
+}
+.post-big__date {
+    margin: 0 0 10px 0;
+    font-size: 15px;
+    color: #777;
+}
+.post-big__title {
+    margin: 0 0 20px 0;
+    font-size: 26px;
+}
+.post-big__description {
+    margin: 0 0 15px 0;
+    font-size: 17px;
+    color: #777;
+}
+.post-big__image {
+    width: 40%;
+}
+.post-big__image img {
+    height: 200px;
+}
+
+/* ------- post-middle ------- */
+
+.post-middle__image img {
+    height: 200px;
+}
+.post-middle__date {
+    margin: 10px 0 10px 0;
+    font-size: 15px;
+    color: #777;
+}
+.post-middle__title {
+    margin: 0 0 30px 0;
+    font-size: 23px;
+}
+.post-middle__description {
+    margin: 0 0 15px 0;
+    font-size: 15px;
+}
+
+/* ------- post-small ------- */
+
+.post-small__information {
+    width: 50%;
+}
+.post-small__date {
+    margin: 0 0 15px 0;
+    font-size: 15px;
+    color: #777;
+}
+.post-small__title {
+    margin: 0 0 30px 0;
+    font-size: 23px;
+}
+.post-small__description {
+    margin: 0 0 15px 0;
+    font-size: 15px;
+}
+.post-small__image {
+    width: 50%;
+}
+.post-small__image img {
+    height: 100px;
+}
+.post-small__icons {
+    margin: 25px 0 0 0;
+}
