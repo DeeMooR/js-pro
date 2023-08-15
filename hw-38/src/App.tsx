@@ -34,18 +34,18 @@ function App() {
         {showPosts ?
             <div className="flex-big-small">
                 <div className="flex-big-small__left">
-                    {posts.length > 0 && <Post obj={posts[0]} type='big' />}
+                    {posts.slice(0, 1).map((value, i) => <Post key={i} obj={value} type='big' />)}
                     <div className="flex-middle">
                         <div className="flex-middle__left">
-                            {posts.slice(1, 3).map(i => <Post obj={i} type='middle' />)}
+                            {posts.slice(1, 3).map((value, i) => <Post key={i} obj={value} type='middle' />)}
                         </div>
                         <div className="flex-middle__right">
-                            {posts.slice(3, 5).map(i => <Post obj={i} type='middle' />)}
+                            {posts.slice(3, 5).map((value, i) => <Post key={i} obj={value} type='middle' />)}
                         </div>
                     </div>
                 </div>
                 <div className="flex-big-small__right">
-                    {posts.slice(5).map(i => <Post obj={i} type='small' />)}
+                    {posts.slice(5).map((value, i) => <Post key={i} obj={value} type='small' />)}
                 </div>
             </div>
         : ''}

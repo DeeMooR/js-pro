@@ -22,38 +22,19 @@ const Post = ({obj, type}: {obj: IPost, type: 'big' | 'middle' | 'small'}) => {
         if (!like) setValueDislike(prevState => !prevState)
     }
 
-
-    function getBigOrSmallPost() {
-        return (
+    return (
+        <>
+        <article className={`post-${type} post`}>
             <div className={`post-${type}__main post__main`}>
                 <div className={`post-${type}__information`}>
                     <p className={`post-${type}__date`}>{obj.date}</p>
                     <h2 className={`post-${type}__title`}>{obj.title}</h2>
-                    {type === 'big' ? <p className={`post-${type}__description`}>{obj.description}</p> : null}
+                    {type === 'big' && <p className={`post-${type}__description`}>{obj.description}</p>}
                 </div>
                 <div className={`post-${type}__image`}>
                     <img src={obj.image} alt="image" />
                 </div>
             </div>
-        );
-    }
-    function getMiddlePost() {
-        return (
-            <>
-            <div className={`post-${type}__image`}>
-                <img src={obj.image} alt="image" />
-            </div>
-            <p className={`post-${type}__date`}>{obj.date}</p>
-            <h2 className={`post-${type}__title`}>{obj.title}</h2>
-            </>
-        );
-    }
-
-    return (
-        <>
-        <article className={`post-${type} post`}>
-            {type === 'big' || type === 'small' ? getBigOrSmallPost() : null}
-            {type === 'middle' ? getMiddlePost() : null}
 
             <div className={`post-${type}__icons post__icons`}>
                 <div className="icons__left">

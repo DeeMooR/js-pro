@@ -82,6 +82,9 @@ img {
 
 /* ------- post-middle ------- */
 
+.post-middle__main {
+    flex-direction: column-reverse;
+}
 .post-middle__image img {
     height: 200px;
 }
