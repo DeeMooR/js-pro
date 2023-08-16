@@ -9,10 +9,10 @@ interface IPost {
     lesson_num: number,
     title: string,
     description: string,
-    author: number
+    author: number,
 }
 
-const Post = ({obj, type}: {obj: IPost, type: 'big' | 'middle' | 'small'}) => {
+const Post = ({obj, type}: {obj: IPost, type: 'page' | 'big' | 'middle' | 'small'}) => {
     const [like, setValueLike] = useState(false);
     const [dislike, setValueDislike] = useState(false);
     const addLike = () => {
@@ -27,9 +27,11 @@ const Post = ({obj, type}: {obj: IPost, type: 'big' | 'middle' | 'small'}) => {
         <article className={`post-${type} post`}>
             <div className={`post-${type}__main post__main`}>
                 <div className={`post-${type}__information`}>
-                    <p className={`post-${type}__date`}>{obj.date}</p>
-                    <h2 className={`post-${type}__title`}>{obj.title}</h2>
-                    {type === 'big' && <p className={`post-${type}__description`}>{obj.description}</p>}
+                    {type !== 'page' && <p className={`post-${type}__date`}>{obj.date}</p>}
+                    {type !== 'page' && <h2 className={`post-${type}__title`}>{obj.title}</h2>}
+                    {type === 'big' || type === 'page' && 
+                        <p className={`post-${type}__description`}>{obj.description}</p>
+                    }
                 </div>
                 <div className={`post-${type}__image`}>
                     <img src={obj.image} alt="image" />
@@ -45,7 +47,8 @@ const Post = ({obj, type}: {obj: IPost, type: 'big' | 'middle' | 'small'}) => {
                 </div>
                 <div className="icons__right">
                     <a className='save'></a>
-                    <a className='three-dots'></a>
+                    {type !== 'page' && <a className='three-dots'></a>}
+                    {type === 'page' && <a className='add-favorite'>Add to favorites</a>}
                 </div>
             </div>
         </article>
