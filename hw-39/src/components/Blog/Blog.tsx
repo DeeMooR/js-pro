@@ -3,13 +3,14 @@ import PageTemplate from '../PageTemplate';
 import Navigation from './Navigation'
 import PrevNext from '../PrevNext';
 import Posts from './Posts';
+import {IPost} from 'src/interfaces';
 
-const Blog = () => {
+const Blog = ({posts}: {posts: IPost[]}) => {
     return (
         <PageTemplate title='Blog' noBack>
             <div className='blog__container'>
                 <Navigation />
-                <Posts />
+                <Posts posts={posts} />
                 <PrevNext />
             </div>
         </PageTemplate>

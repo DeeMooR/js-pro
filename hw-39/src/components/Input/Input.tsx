@@ -4,7 +4,7 @@ import './Input.css'
 interface IInput {
     label: string,
     placeholder: string,
-    type: 'password' | 'email',
+    type: 'password' | 'email' | 'text',
 }
 
 const Input:FC<IInput> = ({label, placeholder, type}) => {

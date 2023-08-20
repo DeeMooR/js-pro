@@ -1,22 +1,9 @@
-import React, {useState} from 'react'
-import Post from '../../Post'
+import React, {useState, useEffect} from 'react'
+import Post from 'src/components/Post'
 import './Posts.css'
+import {IPost} from 'src/interfaces';
 
-const Posts = () => {
-    const [posts, setPosts] = useState([]);
-    const src = 'https://studapi.teachmeskills.by/blog/posts/?limit=10'
-    
-    const fetchPosts = () => {
-        fetch(src)
-        .then(response => {
-            if (response.ok) return response.json();
-        })
-        .then(json => {
-            setPosts(json.results);
-        })
-    }
-    if(!posts[0]) fetchPosts();
-
+const Posts = ({posts}: {posts: IPost[]}) => {
     return (
         <div className="flex-middle-small">
             <div className="flex-middle">

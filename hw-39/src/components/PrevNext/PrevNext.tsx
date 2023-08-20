@@ -1,5 +1,7 @@
 import React from 'react'
 import './PrevNext.css' 
+import IconLeft from "src/icons/left.png"
+import IconRight from "src/icons/right.png"
 
 const pageNumbers = ['1', '2', '3', '...', '8']
 
@@ -7,7 +9,7 @@ const PrevNext = () => {
   return (
     <div className='prev-next'>
         <a href='#' className="prev">
-            <img src={require('../../icons/left.png')} alt="left" />
+            <img src={IconLeft} alt="left" />
             <span>Prev</span>
         </a>
         <div className="prev-next__numbers">
@@ -15,7 +17,7 @@ const PrevNext = () => {
         </div>
         <a href='#' className="next">
             <span>Next</span>
-            <img src={require('../../icons/right.png')} alt="right" />
+            <img src={IconRight} alt="right" />
         </a>
     </div>
   )

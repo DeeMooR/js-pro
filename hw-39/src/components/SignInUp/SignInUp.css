@@ -5,11 +5,11 @@
     font-size: 13px;
     font-weight: 500;
 }
-.no-account {
+.have-account {
     padding: 10px 0 0 0;
     text-align: center;
 }
-.no-account a {
+.have-account a {
     font-weight: 600;
     color: #2835a1;
 }
