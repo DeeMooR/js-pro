@@ -1,0 +1,10 @@
+.input__container span {
+    display: block;
+    font-weight: 500;
+    margin: 30px 0 10px 0;
+}
+.input__container input {
+    background-color: #fff;
+    padding: 12px 15px;
+    width: 100%;
+}
