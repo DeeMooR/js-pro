@@ -1,0 +1,9 @@
+.navigation nav {
+    display: flex;
+    padding: 40px 0 15px;
+}
+.navigation hr {
+    height: 2px;
+    width: 100%;
+    background-color: #bbb;
+}
