@@ -9,7 +9,7 @@ interface IInput {
 }
 
 const Input:FC<IInput> = ({label, placeholder, type}) => {
-    const {theme, toggleTheme} = useContext(ThemeContext);
+    const {theme} = useContext(ThemeContext);
 
     return (
         <div>

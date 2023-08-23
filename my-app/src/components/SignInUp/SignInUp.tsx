@@ -10,7 +10,7 @@ interface ISignInUp {
 
 const SignInUp:FC<ISignInUp> = ({text}) => {
   return (
-    <PageTemplate title={text}>
+    <PageTemplate title={text} hasBack>
         <form>
             {text === 'Sign Up' && <Input type='text' label='Name' placeholder='Your name' />}
             <Input type='email' label='Email' placeholder='Your email' />

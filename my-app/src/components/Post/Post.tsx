@@ -22,7 +22,7 @@ interface IPost {
     author: number,
 }
 
-const Post = ({obj, type}: {obj: IPost, type: 'page' | 'big' | 'middle' | 'small'}) => {
+const Post = ({obj, type}: {obj: IPost, type: 'page' | 'search' | 'middle' | 'small'}) => {
     const {theme, toggleTheme} = useContext(ThemeContext);
     const [like, setValueLike] = useState(false);
     const [dislike, setValueDislike] = useState(false);
@@ -38,9 +38,9 @@ const Post = ({obj, type}: {obj: IPost, type: 'page' | 'big' | 'middle' | 'small
         <article className={`post-${type} post`}>
             <div className={`post-${type}__main post__main`}>
                 <div className={`post-${type}__information`}>
-                    {type !== 'page' && <p className={`post-${type}__date`}>{obj.date}</p>}
+                    {type !== 'page' && <p className='post__date'>{obj.date}</p>}
                     {type !== 'page' && <h2 className={`post-${type}__title`}>{obj.title}</h2>}
-                    {type === 'big' || type === 'page' && 
+                    {type === 'page' && 
                         <p className={`post-${type}__description`}>{obj.description}</p>
                     }
                 </div>

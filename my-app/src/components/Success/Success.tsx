@@ -5,7 +5,7 @@ import "./Success.css"
 
 const Success = () => {
     return (
-        <PageTemplate title='Success'>
+        <PageTemplate title='Success' hasBack>
             <form>
                 <p className='success-text'>Email confirmes.<br/>Your registration is now completed</p>
                 <Button text='Go to home' />

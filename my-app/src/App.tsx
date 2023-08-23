@@ -10,7 +10,6 @@ interface IThemeContext {
     theme: 'light' | 'dark',
     toggleTheme: () => void,
 }
-
 export const ThemeContext = createContext<IThemeContext>({theme: 'light', toggleTheme: () => {}});
 
 const App = () => {
@@ -20,7 +19,7 @@ const App = () => {
     }
 
     const [posts, setPosts] = useState([]);
-    const src = 'https://studapi.teachmeskills.by/blog/posts/?limit=10'
+    const src = 'https://studapi.teachmeskills.by/blog/posts/?limit=30'
 
     useEffect(() => {
         fetchData(src, setPosts);
@@ -28,10 +27,10 @@ const App = () => {
 
     return (
         <ThemeContext.Provider value={{theme, toggleTheme}}>
-            <SignInUp text='Sign Up' />
+            {/* <SignInUp text='Sign Up' />
             <SignInUp text='Sign In' />
             <Success />
-            <PagePost posts={posts} />
+            <PagePost posts={posts} /> */}
             <Blog posts={posts} />
         </ThemeContext.Provider>
     )

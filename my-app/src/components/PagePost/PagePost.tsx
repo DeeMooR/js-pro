@@ -7,7 +7,7 @@ const PagePost = ({posts}: {posts: IPost[]}) => {
     return (
         <>
         {posts[0] &&
-            <PageTemplate title={posts[0].title} hasPrevNext>
+            <PageTemplate title={posts[0].title} hasBack hasPrevNext>
                 <div className='page-post__container'>
                     <Post obj={posts[0]} type='page' />
                 </div>

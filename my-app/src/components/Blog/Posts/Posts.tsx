@@ -15,7 +15,7 @@ const Posts = ({posts}: {posts: IPost[]}) => {
                 </div>
             </div>
             <div className="flex-small">
-                {posts.slice(5).map((value, i) => <Post key={i} obj={value} type='small' />)}
+                {posts.slice(5, 10).map((value, i) => <Post key={i} obj={value} type='small' />)}
             </div>
         </div>
     );

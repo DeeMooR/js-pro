@@ -12,7 +12,7 @@ interface ISignInUp {
 }
 
 const PrevNext:FC<ISignInUp> = ({hasNumbers}) => {
-    const {theme, toggleTheme} = useContext(ThemeContext);
+    const {theme} = useContext(ThemeContext);
     const pageNumbers = ['1', '2', '3', '...', '8'];
 
     return (
