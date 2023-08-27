@@ -1,23 +1,14 @@
-import React, {useState, useEffect, createContext} from 'react';
-import SignInUp from './components/SignInUp';
-import Success from './components/Success';
-import PagePost from './components/PagePost';
-import Blog from './components/Blog';
+import React, {useState, useEffect} from 'react';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
+import SignInUp from './pages/SignInUp';
+import Success from './pages/Success';
+import PagePost from './pages/PagePost';
+import Blog from './pages/Blog';
+import Home from './pages/Home';
 import {fetchData} from './helpers';
 import './App.css'
 
-interface IThemeContext {
-    theme: 'light' | 'dark',
-    toggleTheme: () => void,
-}
-export const ThemeContext = createContext<IThemeContext>({theme: 'light', toggleTheme: () => {}});
-
 const App = () => {
-    const [theme, setTheme] = useState<'light' | 'dark'>('light');
-    const toggleTheme = () => {
-        setTheme(theme === 'light' ? 'dark' : 'light');
-    }
-
     const [posts, setPosts] = useState([]);
     const src = 'https://studapi.teachmeskills.by/blog/posts/?limit=30'
 
@@ -25,14 +16,19 @@ const App = () => {
         fetchData(src, setPosts);
     }, []);
 
+    const location = useLocation();
+
     return (
-        <ThemeContext.Provider value={{theme, toggleTheme}}>
-            {/* <SignInUp text='Sign Up' />
-            <SignInUp text='Sign In' />
-            <Success />
-            <PagePost posts={posts} /> */}
-            <Blog posts={posts} />
-        </ThemeContext.Provider>
+        <>
+        <Routes>
+            <Route path='/blog' element={<Blog posts={posts} />} />
+            <Route path='/blog/:id' element={!!posts.length && <PagePost posts={posts} />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/success' element={<Success />} />
+            <Route path='/sign-in' element={<SignInUp text='Sign In' />} />
+        </Routes>
+        {location.pathname === '/' && <Navigate to='/blog' />}
+        </>
     )
 }
 

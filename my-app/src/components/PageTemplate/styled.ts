@@ -8,8 +8,3 @@ export const StyledContainer = styled.div<{theme: 'light' | 'dark'}>`
     background-color: ${({theme}) => theme === 'light' ? '#eee' : '#222'};
     color: ${({theme}) => theme === 'light' ? '#000' : '#fff'};
 `
-export const StyledButton = styled.button<{theme: 'light' | 'dark'}>`
-    align-self: flex-end;
-    background-color: ${({theme}) => theme === 'light' ? '#eee' : '#222'};
-    color: ${({theme}) => theme === 'light' ? '#000' : '#fff'};
-`

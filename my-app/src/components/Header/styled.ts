@@ -8,6 +8,11 @@ export const StyledHeader = styled.header<{theme: 'light' | 'dark'}>`
     background-color: #2835a1;
     border: 1.5px solid ${({theme}) => theme === 'light' ? '#eee' : '#222'};
 `
+export const StyledDivEmpty = styled.div<{theme: 'light' | 'dark'}>`
+    width: auto;
+    flex-grow: 1;
+    border-right: 1.5px solid ${({theme}) => theme === 'light' ? '#eee' : '#222'};
+`
 export const StyledButtonBlue = styled.button<{theme: 'light' | 'dark'}>`
     width: 5%;
     background-color: #2835a1;
@@ -18,3 +23,5 @@ export const StyledButtonLightBlue = styled.button<{theme: 'light' | 'dark'}>`
     background-color: #5762c3;
     border-right: 1.5px solid ${({theme}) => theme === 'light' ? '#eee' : '#222'};
 `
+
+

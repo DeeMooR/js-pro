@@ -1,5 +1,6 @@
 import React, {useState, useContext} from 'react'
-import { ThemeContext } from 'src/App'
+import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../PageTemplate/PageTemplate'
 import './Post.css'
 
 import IconLikeBlack from "src/icons/like.png"
@@ -23,7 +24,7 @@ interface IPost {
 }
 
 const Post = ({obj, type}: {obj: IPost, type: 'page' | 'search' | 'middle' | 'small'}) => {
-    const {theme, toggleTheme} = useContext(ThemeContext);
+    const {theme} = useContext(ThemeContext);
     const [like, setValueLike] = useState(false);
     const [dislike, setValueDislike] = useState(false);
     const addLike = () => {
@@ -33,16 +34,18 @@ const Post = ({obj, type}: {obj: IPost, type: 'page' | 'search' | 'middle' | 'sm
         if (!like) setValueDislike(prevState => !prevState)
     }
 
+    const navigate = useNavigate();
+
     return (
         <>
-        <article className={`post-${type} post`}>
+        <article className={`post-${type} post`} onClick={() => navigate(`/blog/${obj.id}`)}>
             <div className={`post-${type}__main post__main`}>
                 <div className={`post-${type}__information`}>
                     {type !== 'page' && <p className='post__date'>{obj.date}</p>}
                     {type !== 'page' && <h2 className={`post-${type}__title`}>{obj.title}</h2>}
-                    {type === 'page' && 
+                    {/* {type === 'page' && 
                         <p className={`post-${type}__description`}>{obj.description}</p>
-                    }
+                    } */}
                 </div>
                 <div className={`post-${type}__image`}>
                     <img src={obj.image} alt="image" />

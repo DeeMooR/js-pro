@@ -4,10 +4,6 @@ main {
     flex-grow: 1;
     padding: 20px 200px 0;
 }
-.title-wrapper {
-    display: flex;
-    justify-content: space-between;
-}
 h1 {
     padding: 15px 0 0 0;
     font-size: 35px;

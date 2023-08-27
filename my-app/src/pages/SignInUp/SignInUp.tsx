@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
-import PageTemplate from '../PageTemplate'
-import Input from '../Input'
-import Button from '../Button'
+import PageTemplate from 'src/components/PageTemplate'
+import Input from 'src/components/Input'
+import Button from 'src/components/Button'
 import "./SignInUp.css"
 
 interface ISignInUp {
@@ -10,7 +10,7 @@ interface ISignInUp {
 
 const SignInUp:FC<ISignInUp> = ({text}) => {
   return (
-    <PageTemplate title={text} hasBack>
+    <PageTemplate title={text} hasBack type_header='not authorized'>
         <form>
             {text === 'Sign Up' && <Input type='text' label='Name' placeholder='Your name' />}
             <Input type='email' label='Email' placeholder='Your email' />
