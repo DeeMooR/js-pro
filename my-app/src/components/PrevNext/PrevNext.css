@@ -1,0 +1,30 @@
+.prev-next {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px 0;
+    font-size: 15px;
+    font-weight: 600;
+    border-top: 1px solid #bbb;
+}
+.prev, .next {
+    display: flex;
+    align-items: center;
+}
+.prev-next__numbers {
+    display: flex;
+    gap: 15px;
+}
+.prev-next img {
+    height: 25px;
+    width: 25px;
+}
+.prev-next a {
+    margin: auto 0;
+}
+.prev-next a:hover {
+    color: #5762c3;
+}
+.prev-next span {
+    padding: 0 5px;
+}
