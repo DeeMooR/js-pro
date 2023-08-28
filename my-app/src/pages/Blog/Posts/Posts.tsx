@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useContext} from 'react'
 import Post from 'src/components/Post'
+import { PostsContext } from 'src/App';
 import './Posts.css'
-import {IPost} from 'src/interfaces';
 
-const Posts = ({posts}: {posts: IPost[]}) => {
+const Posts = () => {
+    const {posts} = useContext(PostsContext);
+
     return (
         <div className="flex-middle-small">
             <div className="flex-middle">

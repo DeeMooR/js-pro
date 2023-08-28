@@ -1,5 +1,5 @@
 import React, {FC, useContext} from 'react'
-import { ThemeContext } from '../PageTemplate/PageTemplate'
+import { ThemeContext } from 'src/App';
 import { StyledSpan, StyledInput } from './styled'
 
 interface IInput {

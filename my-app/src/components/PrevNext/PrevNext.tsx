@@ -1,6 +1,6 @@
 import React, {FC, useContext} from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { ThemeContext } from '../PageTemplate/PageTemplate'
+import { ThemeContext } from 'src/App';
 import './PrevNext.css' 
 
 import IconLeftBlack from "src/icons/left.png"
@@ -17,7 +17,6 @@ const PrevNext:FC<ISignInUp> = ({hasNumbers}) => {
     const pageNumbers = ['1', '2', '3', '...', '8'];
 
     const {id} = useParams<{id: string}>();
-    console.log(id);
 
     return (
         <>

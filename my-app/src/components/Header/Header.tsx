@@ -1,7 +1,6 @@
 import React, {FC, useState, useContext, ChangeEvent, useRef} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../Button'
-import { ThemeContext } from '../PageTemplate/PageTemplate'
+import { ThemeContext } from 'src/App';
 import { StyledHeader, StyledDivEmpty, StyledButtonBlue, StyledButtonLightBlue } from './styled'
 import './Header.css'
 
