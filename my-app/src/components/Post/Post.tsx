@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
-import { ThemeContext } from '../PageTemplate/PageTemplate'
+import { ThemeContext } from 'src/App';
 import './Post.css'
 
 import IconLikeBlack from "src/icons/like.png"
@@ -38,8 +38,8 @@ const Post = ({obj, type}: {obj: IPost, type: 'page' | 'search' | 'middle' | 'sm
 
     return (
         <>
-        <article className={`post-${type} post`} onClick={() => navigate(`/blog/${obj.id}`)}>
-            <div className={`post-${type}__main post__main`}>
+        <article className={`post-${type} post`}>
+            <div className={`post-${type}__main post__main`} onClick={() => navigate(`/blog/${obj.id}`)}>
                 <div className={`post-${type}__information`}>
                     {type !== 'page' && <p className='post__date'>{obj.date}</p>}
                     {type !== 'page' && <h2 className={`post-${type}__title`}>{obj.title}</h2>}

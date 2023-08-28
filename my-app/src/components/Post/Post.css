@@ -16,6 +16,7 @@
 .post__main {
     display: flex;
     gap: 15px;
+    cursor: pointer;
 }
 .post__date {
     margin: 0 0 10px 0;

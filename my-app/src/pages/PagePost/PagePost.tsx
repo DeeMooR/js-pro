@@ -1,15 +1,18 @@
-import React, {useState, useEffect} from 'react'
+import React, {useContext} from 'react'
 import { useParams } from 'react-router-dom';
 import PageTemplate from 'src/components/PageTemplate'
 import Post from 'src/components/Post'
-import {IPost} from 'src/interfaces';
+import { PostsContext } from 'src/App';
+import { ThemeContext } from 'src/App';
 
-const PagePost = ({posts}: {posts: IPost[]}) => {
+const PagePost = () => {
+    const {posts} = useContext(PostsContext);
+    const {theme} = useContext(ThemeContext);
     const {id} = useParams<{id: string}>();
 
     return (
         <>
-        {id &&
+        {id && posts[0] &&
             <PageTemplate title={posts[+id - 1].title} hasBack hasPrevNext type_header='authorized'>
                 <div className='page-post__container'>
                     <Post obj={posts[+id - 1]} type='page' />

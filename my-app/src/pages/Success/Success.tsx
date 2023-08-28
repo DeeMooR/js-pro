@@ -3,6 +3,8 @@ import PageTemplate from 'src/components/PageTemplate'
 import Button from 'src/components/Button'
 import "./Success.css"
 
+
+
 const Success = () => {
     return (
         <PageTemplate title='Success' hasBack type_header='authorized'>
