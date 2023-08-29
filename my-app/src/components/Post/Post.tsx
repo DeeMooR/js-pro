@@ -1,6 +1,6 @@
-import React, {useState, useContext} from 'react'
+import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-import { ThemeContext } from 'src/App';
+import { useSelector, useDispatch } from 'react-redux';
 import './Post.css'
 
 import IconLikeBlack from "src/icons/like.png"
@@ -11,6 +11,7 @@ import IconSaveBlack from "src/icons/save.png"
 import IconSaveWhite from "src/icons/save-white.png"
 import IconThreeDotsBlack from "src/icons/three-dots.png"
 import IconThreeDotsWhite from "src/icons/three-dots-white.png"
+
 
 interface IPost {
     id: number,
@@ -23,8 +24,10 @@ interface IPost {
     author: number,
 }
 
-const Post = ({obj, type}: {obj: IPost, type: 'page' | 'search' | 'middle' | 'small'}) => {
-    const {theme} = useContext(ThemeContext);
+const Post = ({obj, type}: {obj: IPost, type: 'page' | 'search' | 'big' | 'middle' | 'small'}) => {
+    const theme = useSelector(({theme}) => theme);
+    const isOpenPost = useSelector(({modalInfo}) => modalInfo.isOpenPost);
+    const isOpenImage = useSelector(({modalInfo}) => modalInfo.isOpenImage);
     const [like, setValueLike] = useState(false);
     const [dislike, setValueDislike] = useState(false);
     const addLike = () => {
@@ -35,19 +38,24 @@ const Post = ({obj, type}: {obj: IPost, type: 'page' | 'search' | 'middle' | 'sm
     }
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const clickThreeDots = () => {
+        navigate(`/blog/${obj.id}`);
+        if (isOpenPost) dispatch({ type: 'TOGGLE_MODAL', payload: {id: obj.id, type: 'post'}})
+    }
 
     return (
-        <>
         <article className={`post-${type} post`}>
-            <div className={`post-${type}__main post__main`} onClick={() => navigate(`/blog/${obj.id}`)}>
+           <div className={`post-${type}__main post__main`} onClick={!isOpenPost && type !== 'page' ? () => dispatch({ type: 'TOGGLE_MODAL', payload: {id: obj.id, type: 'post'}}) : undefined}>
                 <div className={`post-${type}__information`}>
                     {type !== 'page' && <p className='post__date'>{obj.date}</p>}
                     {type !== 'page' && <h2 className={`post-${type}__title`}>{obj.title}</h2>}
-                    {/* {type === 'page' && 
+                    {type === 'page' || type === 'big' &&
                         <p className={`post-${type}__description`}>{obj.description}</p>
-                    } */}
+                    }
                 </div>
-                <div className={`post-${type}__image`}>
+                <div className={`post-${type}__image`} onClick={!isOpenImage && type === 'page' ? () => dispatch({ type: 'TOGGLE_MODAL', payload: {id: obj.id, type: 'image'}}) : undefined}>
                     <img src={obj.image} alt="image" />
                 </div>
             </div>
@@ -68,13 +76,12 @@ const Post = ({obj, type}: {obj: IPost, type: 'page' | 'search' | 'middle' | 'sm
                         <img src={theme === 'light' ? IconSaveBlack : IconSaveWhite} alt="save" />
                     </a>
                     {type !== 'page' && <a className='icon'>
-                        <img src={theme === 'light' ? IconThreeDotsBlack : IconThreeDotsWhite} alt="three-dots" />
+                        <img src={theme === 'light' ? IconThreeDotsBlack : IconThreeDotsWhite} onClick={clickThreeDots}  alt="three-dots"  />
                     </a>}
                     {type === 'page' && <a className='add-favorite'>Add to favorites</a>}
                 </div>
             </div>
         </article>
-        </>
     )
 }
 

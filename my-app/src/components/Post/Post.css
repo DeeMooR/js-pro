@@ -84,6 +84,52 @@
 .post-search__icons {
     margin: 25px 0 0 0;
 }
+    
+/* ------- post-big ------- */
+
+.post-big {
+    margin: 0 45px 45px;
+    padding: 0;
+    height: calc(100% - 85px);
+    position: relative;
+}
+.post-big__main {
+    cursor: auto;
+}
+.post-big__information {
+    width: 55%;
+}
+.post-big__date {
+    margin: 0 0 10px 0;
+    font-size: 15px;
+    color: #777;
+}
+.post-big__title {
+    margin: 0 0 20px 0;
+    font-size: 26px;
+}
+.post-big__description {
+    margin: 0 0 15px 0;
+    font-size: 17px;
+    color: #777;
+}
+.post-big__image {
+    width: 45%;
+    border: 1px solid #bbb;
+}
+.post-big__image img {
+    height: 200px;
+}
+.post-big__icons {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.post-big__icons .icon {
+    width: 32px;
+    height: 32px;
+}
 
 /* ------- post-middle ------- */
 

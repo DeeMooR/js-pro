@@ -1,12 +1,14 @@
 import React, {FC, ReactNode, useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Header from '../Header'
 import Post from '../Post'
 import PrevNext from '../PrevNext'
+import Modal from '../Modal';
 import { PostsContext } from 'src/App';
-import { ThemeContext } from 'src/App';
 import { StyledContainer } from './styled'
 import './PageTemplate.css'
+
 
 interface IPageTemplate {
     title: string,
@@ -18,11 +20,14 @@ interface IPageTemplate {
 }
 
 const PageTemplate:FC<IPageTemplate> = ({title, children, hasBack, hasPrevNext, hasNumbers, type_header}) => {
-    const {theme} = useContext(ThemeContext);
+    const theme = useSelector(({theme}) => theme);
+    const isOpenPost = useSelector(({modalInfo}) => modalInfo.isOpenPost);
+    const isOpenImage = useSelector(({modalInfo}) => modalInfo.isOpenImage);
     const {posts} = useContext(PostsContext);
 
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
+
 
     return (
         <StyledContainer theme={theme} className={theme === 'dark' ? 'dark' : ''}>
@@ -43,6 +48,14 @@ const PageTemplate:FC<IPageTemplate> = ({title, children, hasBack, hasPrevNext, 
                 <span>2022</span>
                 <span>All right reserved</span>
             </footer>
+            
+            {isOpenPost &&
+                <Modal />
+            }
+            {isOpenImage &&
+                <Modal />
+            }
+            {/* {isOpenPost || isOpenImage && <Modal />} */}
         </StyledContainer>
     )
 }
