@@ -28,3 +28,8 @@
 .prev-next span {
     padding: 0 5px;
 }
+.prev-next .disabled {
+    display: flex;
+    align-items: center;
+    color: #888;
+}

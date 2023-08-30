@@ -15,18 +15,7 @@ interface IPostsContext {
 }
 export const PostsContext = createContext<IPostsContext>({ posts: [] });
 
-interface IThemeContext {
-    theme: 'light' | 'dark',
-    toggleLightTheme: () => void,
-    toggleDarkTheme: () => void,
-}
-export const ThemeContext = createContext<IThemeContext>({ theme: 'light', toggleLightTheme: () => {}, toggleDarkTheme: () => {}});
-
 const App = () => {
-    const [theme, setTheme] = useState<'light' | 'dark'>('light');
-    const toggleLightTheme = () => setTheme('light');
-    const toggleDarkTheme = () => setTheme('dark');
-    
     const [posts, setPosts] = useState<IPost[]>([]);
     const src = 'https://studapi.teachmeskills.by/blog/posts/?limit=30'
     useEffect(() => {
@@ -39,7 +28,6 @@ const App = () => {
         <>
         {posts[0] &&
             <PostsContext.Provider value={{ posts }}>
-            <ThemeContext.Provider value={{theme, toggleLightTheme, toggleDarkTheme}}>
                 <Routes>
                     <Route path='/blog' element={<Blog />} />
                     <Route path='/blog/:id' element={<PagePost />} />
@@ -48,7 +36,6 @@ const App = () => {
                     <Route path='/sign-in' element={<SignInUp text='Sign In' />} />
                 </Routes>
                 {location.pathname === '/' && <Navigate to='/blog' />}
-            </ThemeContext.Provider>
             </PostsContext.Provider>
         }
         </>

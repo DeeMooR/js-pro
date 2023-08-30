@@ -3,11 +3,9 @@ import { useParams } from 'react-router-dom';
 import PageTemplate from 'src/components/PageTemplate'
 import Post from 'src/components/Post'
 import { PostsContext } from 'src/App';
-import { ThemeContext } from 'src/App';
 
 const PagePost = () => {
     const {posts} = useContext(PostsContext);
-    const {theme} = useContext(ThemeContext);
     const {id} = useParams<{id: string}>();
 
     return (

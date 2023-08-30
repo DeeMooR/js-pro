@@ -1,13 +1,13 @@
-import React, {FC, useState, useContext, ChangeEvent, useRef} from 'react'
+import React, {FC, useState, ChangeEvent, useRef} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { ThemeContext } from 'src/App';
+import { useSelector, useDispatch } from 'react-redux';
 import { StyledHeader, StyledDivEmpty, StyledButtonBlue, StyledButtonLightBlue } from './styled'
 import './Header.css'
 
-import IconMenu from "src/icons/menu.png"
-import IconCross from "src/icons/cross.png"
-import IconSearch from "src/icons/search.png"
-import IconAccount from "src/icons/account.png"
+import IconMenu from "src/icons/menu-white.png"
+import IconCross from "src/icons/cross-white.png"
+import IconSearch from "src/icons/search-white.png"
+import IconAccount from "src/icons/account-white.png"
 
 import IconLightBlack from "src/icons/sun.png"
 import IconDarkBlack from "src/icons/moon.png"
@@ -20,7 +20,6 @@ interface IHeader {
 }
 
 const Header:FC<IHeader> = ({ onSearchChange, type }) => {
-    const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext);
     const [clickMenu, setClickMenu] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -33,6 +32,9 @@ const Header:FC<IHeader> = ({ onSearchChange, type }) => {
         onSearchChange('');
     };
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const theme = useSelector(({theme}) => theme);
 
     return (
         <>
@@ -73,8 +75,8 @@ const Header:FC<IHeader> = ({ onSearchChange, type }) => {
                 </>
             }
             <div className="menu__toggle-theme">
-                <button type='button' onClick={toggleLightTheme}><img src={theme === 'light' ? IconLightBlack : IconLightWhite} alt="light-theme" /></button>
-                <button type='button' onClick={toggleDarkTheme}><img src={theme === 'light' ? IconDarkBlack : IconDarkWhite} alt="dark-theme" /></button>
+                <button type='button' onClick={() => dispatch({ type: 'TOGGLE_THEME', payload: 'light' })}><img src={theme === 'light' ? IconLightBlack : IconLightWhite} alt="light-theme" /></button>
+                <button type='button' onClick={() => dispatch({ type: 'TOGGLE_THEME', payload: 'dark' })}><img src={theme === 'light' ? IconDarkBlack : IconDarkWhite} alt="dark-theme" /></button>
             </div>
             {type === 'not authorized' ?
                 <button type='button' className="menu__leave" onClick={() => navigate('/sign-in')}>Sign In</button>

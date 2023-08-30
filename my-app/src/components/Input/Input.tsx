@@ -1,5 +1,5 @@
 import React, {FC, useContext} from 'react'
-import { ThemeContext } from 'src/App';
+import { useSelector } from 'react-redux';
 import { StyledSpan, StyledInput } from './styled'
 
 interface IInput {
@@ -9,7 +9,7 @@ interface IInput {
 }
 
 const Input:FC<IInput> = ({label, placeholder, type}) => {
-    const {theme} = useContext(ThemeContext);
+    const theme = useSelector(({theme}) => theme);
 
     return (
         <div>
