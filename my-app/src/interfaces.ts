@@ -7,4 +7,7 @@ export interface IPost {
     title: string,
     description: string,
     author: number,
+    isFavorite: boolean,
+    isLike: boolean,
+    isDislike: boolean
 }

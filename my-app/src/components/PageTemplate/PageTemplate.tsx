@@ -1,13 +1,13 @@
-import React, {FC, ReactNode, useState, useContext} from 'react'
+import React, {FC, ReactNode, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Header from '../Header'
 import Post from '../Post'
 import PrevNext from '../PrevNext'
 import Modal from '../Modal';
-import { PostsContext } from 'src/App';
 import { StyledContainer } from './styled'
 import './PageTemplate.css'
+import { IPost } from 'src/interfaces';
 
 
 interface IPageTemplate {
@@ -20,10 +20,10 @@ interface IPageTemplate {
 }
 
 const PageTemplate:FC<IPageTemplate> = ({title, children, hasBack, hasPrevNext, hasNumbers, type_header}) => {
+    const posts: IPost[] = useSelector(({posts}) => posts);
     const theme = useSelector(({theme}) => theme);
     const isOpenPost = useSelector(({modalInfo}) => modalInfo.isOpenPost);
     const isOpenImage = useSelector(({modalInfo}) => modalInfo.isOpenImage);
-    const {posts} = useContext(PostsContext);
 
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
@@ -48,14 +48,8 @@ const PageTemplate:FC<IPageTemplate> = ({title, children, hasBack, hasPrevNext, 
                 <span>2022</span>
                 <span>All right reserved</span>
             </footer>
-            
-            {isOpenPost &&
-                <Modal />
-            }
-            {isOpenImage &&
-                <Modal />
-            }
-            {/* {isOpenPost || isOpenImage && <Modal />} */}
+
+            {(isOpenPost || isOpenImage) && <Modal />}
         </StyledContainer>
     )
 }

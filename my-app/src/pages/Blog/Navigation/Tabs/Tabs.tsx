@@ -4,9 +4,9 @@ import Tab from './Tab'
 const Tabs = () => {
     return (
         <>
-        <Tab text='All' isActive/>
+        <Tab text='All'/>
         <Tab text='My favorites'/>
-        <Tab text='Popular' isDisabled/>
+        <Tab text='Popular'/>
         </>
     )
 }

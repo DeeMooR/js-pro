@@ -1,9 +1,6 @@
-export const fetchData = (src: string, setPosts: Function) => {
-    fetch(src)
-    .then(response => {
-        if (response.ok) return response.json();
-    })
-    .then(json => {
-        setPosts(json.results);
-    });
-};
+export const fetchPosts = async () => {
+    const src = 'https://studapi.teachmeskills.by/blog/posts/?limit=30'
+    let responce = await fetch(src);
+    let jsonPosts = await responce.json();
+    return jsonPosts.results;
+}
