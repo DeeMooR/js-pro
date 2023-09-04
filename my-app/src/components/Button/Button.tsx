@@ -3,11 +3,12 @@ import './Button.css'
 
 interface ITitle {
     text: string;
+    handleClick?: () => void
 }
 
-const Button:FC<ITitle> = ({text}) => {
+const Button:FC<ITitle> = ({text, handleClick}) => {
     return (
-        <button className='custom-button'>{text}</button>
+        <button className='custom-button' onClick={handleClick}>{text}</button>
     )
 }
 

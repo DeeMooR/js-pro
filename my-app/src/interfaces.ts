@@ -11,3 +11,9 @@ export interface IPost {
     isLike: boolean,
     isDislike: boolean
 }
+
+export interface IUser {
+    username: string,
+    email: string,
+    password: string
+}

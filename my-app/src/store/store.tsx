@@ -1,4 +1,5 @@
-import { legacy_createStore as createStore } from 'redux';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { composeWithDevTools} from 'redux-devtools-extension'
 import { IPost } from 'src/interfaces';
 
@@ -11,7 +12,13 @@ const initialState = {
         id: null
     },
     posts: [],
-    navigation: 'All'
+    user: {
+        username: '',
+        email: '',
+        id: null
+    },
+    navigation: 'All',
+    isLoading: false
 };
 
 const rootReducer = (state = initialState, action: any) => {
@@ -72,6 +79,12 @@ const rootReducer = (state = initialState, action: any) => {
                 }))
             };
         }
+        case 'SET_USER':  {
+            return {
+                ...state,
+                user: action.payload
+            };
+        }
         case 'SET_LIKE':  {
             return {
                 ...state,
@@ -111,11 +124,20 @@ const rootReducer = (state = initialState, action: any) => {
                 })
             };
         }
+        case 'SET_LOADING':  {
+            return {
+                ...state,
+                isLoading: !state.isLoading,
+            };
+        }
         default:
             return state;
     }
 };
 
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(
+    rootReducer, 
+    composeWithDevTools(applyMiddleware(thunk))
+);
 
 export default store;

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Post from 'src/components/Post'
 import { IPost } from 'src/interfaces';
 import './Posts.css'
+import { FETCH_POSTS } from 'src/actions/actions';
 
 
 
@@ -10,21 +11,10 @@ const Posts = () => {
     const navigation = useSelector(({navigation}) => navigation);
     const posts = useSelector(({posts}) => posts);
     const dispatch = useDispatch();
-    const src = 'https://studapi.teachmeskills.by/blog/posts/?limit=30'
-    
-    let fetchPosts = async () => {
-        try {
-            let responce = await fetch(src);
-            let jsonPosts = await responce.json();
-            let posts: IPost[] = jsonPosts.results;
-            dispatch({type: 'SET_POSTS', payload: posts});
-        } catch (err) {
-            console.log(err);
-        }
-    }
     
     useEffect(() => {
-        if (!posts.length) fetchPosts();
+        //@ts-expect-error
+        if (!posts.length) dispatch(FETCH_POSTS());
     }, []);
 
     console.log(posts)
