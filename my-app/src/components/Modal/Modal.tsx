@@ -1,7 +1,6 @@
 import React, {useContext, MouseEvent} from 'react'
 import { StyledModal } from './styled'
 import { useSelector, useDispatch } from 'react-redux';
-import { PostsContext } from 'src/App';
 import Post from '../Post';
 import PrevNext from '../PrevNext';
 import './Modal.css';
@@ -11,11 +10,11 @@ import IconCrossWhite from "src/icons/cross-white.png";
 
 
 const Modal = () => {
+    const posts = useSelector(({posts}) => posts);
     const theme = useSelector(({theme}) => theme);
     const isOpenPost = useSelector(({modalInfo}) => modalInfo.isOpenPost);
     const isOpenImage = useSelector(({modalInfo}) => modalInfo.isOpenImage);
     const id = useSelector(({modalInfo}) => modalInfo.id);
-    const {posts} = useContext(PostsContext);
 
 
     const dispatch = useDispatch();

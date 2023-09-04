@@ -17,3 +17,12 @@
 .flex-small {
     width: 33.33%;
 }
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.flex .post {
+    width: calc(50% - 10px);
+}
