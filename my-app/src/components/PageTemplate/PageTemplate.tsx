@@ -8,6 +8,7 @@ import Modal from '../Modal';
 import { StyledContainer } from './styled'
 import './PageTemplate.css'
 import { IPost } from 'src/interfaces';
+import Loader from '../Loader';
 
 
 interface IPageTemplate {
@@ -22,6 +23,7 @@ interface IPageTemplate {
 const PageTemplate:FC<IPageTemplate> = ({title, children, hasBack, hasPrevNext, hasNumbers, type_header}) => {
     const posts: IPost[] = useSelector(({posts}) => posts);
     const theme = useSelector(({theme}) => theme);
+    const isLoading = useSelector(({isLoading}) => isLoading);
     const isOpenPost = useSelector(({modalInfo}) => modalInfo.isOpenPost);
     const isOpenImage = useSelector(({modalInfo}) => modalInfo.isOpenImage);
 
@@ -38,7 +40,7 @@ const PageTemplate:FC<IPageTemplate> = ({title, children, hasBack, hasPrevNext, 
                 {search ?
                     posts.filter((value) => value.title.includes(search))
                     .map((value, i) => <Post key={i} obj={value} type='search' />)
-                : <div className='content'>{children}</div>}
+                : <div className='content'>{isLoading ? <Loader /> : children}</div>}
 
                 {hasPrevNext || search ?
                     (hasNumbers ? <PrevNext hasNumbers /> : <PrevNext />) 

@@ -18,6 +18,7 @@ const App = () => {
             <Route path='/home' element={<Home />} />
             <Route path='/success' element={<Success />} />
             <Route path='/sign-in' element={<SignInUp text='Sign In' />} />
+            <Route path='/sign-up' element={<SignInUp text='Sign Up' />} />
         </Routes>
         {location.pathname === '/' && <Navigate to='/blog' />}
         </>
