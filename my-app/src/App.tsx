@@ -5,6 +5,7 @@ import Success from './pages/Success';
 import PagePost from './pages/PagePost';
 import Blog from './pages/Blog';
 import Home from './pages/Home';
+import ActivateUser from './components/ActivateUser';
 import './App.css'
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
     return (
         <>
         <Routes>
+            <Route path='/activate/:uid/:token' element={<ActivateUser />} />
             <Route path='/blog' element={<Blog />} />
             <Route path='/blog/:id' element={<PagePost />} />
             <Route path='/home' element={<Home />} />

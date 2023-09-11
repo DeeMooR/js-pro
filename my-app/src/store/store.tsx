@@ -15,7 +15,8 @@ const initialState = {
     user: {
         username: '',
         email: '',
-        id: null
+        id: null,
+        isActivated: false,
     },
     navigation: 'All',
     isLoading: false
@@ -83,6 +84,12 @@ const rootReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 user: action.payload
+            };
+        }
+        case 'SET_ACTIVATION':  {
+            return {
+                ...state,
+                user: {...state.user, isActivated: true}
             };
         }
         case 'SET_LIKE':  {

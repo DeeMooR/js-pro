@@ -28,7 +28,7 @@ const SignInUp: FC<ISignInUp> = ({ text }) => {
                 {text === 'Sign Up' && <Input type='password' label='Confirm password' placeholder='Confirm password' value={confirmPassword} handleChange={setConfirmPassword} />}
                 {text === 'Sign In' && <a href="#" className='forgot-password'>Forgot password?</a>}
                 {/* @ts-expect-error */}
-                <Button text={text} handleClick={() => dispatch(CREATE_USER({name, email, password}))} />
+                <Button text={text} handleClick={() => dispatch(CREATE_USER({username: name, email, password}))} />
                 <p className='have-account'>{text === 'Sign Up' ? 'Already' : 'Don\'t'} have an account? <a href="#">{text === 'Sign Up' ? 'Sign In' : 'Sign Up'}</a></p>
             </form>
         </PageTemplate>

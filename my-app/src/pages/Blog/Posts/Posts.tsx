@@ -4,16 +4,17 @@ import Post from 'src/components/Post'
 import { IPost } from 'src/interfaces';
 import './Posts.css'
 import { FETCH_POSTS } from 'src/actions/actions';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 
 
 
 const Posts = () => {
     const navigation = useSelector(({navigation}) => navigation);
     const posts = useSelector(({posts}) => posts);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
     
     useEffect(() => {
-        //@ts-expect-error
         if (!posts.length) dispatch(FETCH_POSTS());
     }, []);
 
