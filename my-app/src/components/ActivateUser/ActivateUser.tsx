@@ -17,5 +17,3 @@ const ActivateUser = () => {
 };
 
 export default ActivateUser;
-
-// /NzAxOA/bu48f0-c49baa2ee3e27a6d55d4ac563feaa666

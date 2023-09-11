@@ -36,6 +36,11 @@ const Header:FC<IHeader> = ({ onSearchChange, type }) => {
 
     const theme = useSelector(({theme}) => theme);
 
+    const logOut = (() => {
+        localStorage.removeItem('access');
+        navigate('/sign-in');
+    })
+
     return (
         <>
         <StyledHeader theme={theme} className='header'>
@@ -78,9 +83,7 @@ const Header:FC<IHeader> = ({ onSearchChange, type }) => {
                 <button type='button' onClick={() => dispatch({ type: 'TOGGLE_THEME', payload: 'light' })}><img src={theme === 'light' ? IconLightBlack : IconLightWhite} alt="light-theme" /></button>
                 <button type='button' onClick={() => dispatch({ type: 'TOGGLE_THEME', payload: 'dark' })}><img src={theme === 'light' ? IconDarkBlack : IconDarkWhite} alt="dark-theme" /></button>
             </div>
-            {type === 'not authorized' ?
-                <button type='button' className="menu__leave" onClick={() => navigate('/sign-in')}>Sign In</button>
-            : <button type='button' className="menu__leave">Log Out</button>}
+            <button type='button' className="menu__leave" onClick={logOut}>Log Out</button>
         </div>
         </>
     )

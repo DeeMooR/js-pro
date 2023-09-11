@@ -74,3 +74,44 @@ export const ACTIVATE_USER = (navigate: any, uid: string, token: string) => {
         }
     };
 };
+
+export const SIGN_IN = (navigate: any, email: string, password: string) => {
+    return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+        dispatch({ type: "SET_LOADING" });
+
+        try {
+            let response = await fetch(
+                "https://studapi.teachmeskills.by/auth/jwt/create/",
+                {
+                    method: "POST",
+                    body: JSON.stringify({ email, password }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            )
+                .then((data) => data.json())
+                .then((data) => {
+                    if (data.access) {
+                        navigate("/blog");
+                        console.log(data);
+                        localStorage.setItem("access", data.access);
+                    }
+                });
+            let token = localStorage.getItem("access");
+            let data = await fetch(
+                "https://studapi.teachmeskills.by/auth/users/me/",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            ).then((data) => data.json());
+            console.log(data);
+        } catch (err) {
+            console.log(err);
+        } finally {
+            dispatch({ type: "SET_LOADING" });
+        }
+    };
+};
