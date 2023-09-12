@@ -38,9 +38,6 @@ export const CREATE_USER = (payload: IUser) => {
                 }
             );
             console.log(activate);
-            let user = await activate.json();
-            dispatch({ type: "SET_USERS", payload: user });
-            return user;
         } catch (err) {
             console.log(err);
         } finally {
@@ -64,7 +61,6 @@ export const ACTIVATE_USER = (navigate: any, uid: string, token: string) => {
                     },
                 }
             ).then(() => {
-                dispatch({ type: "SET_ACTIVATION" });
                 navigate("/success");
             });
         } catch (err) {
@@ -90,24 +86,14 @@ export const SIGN_IN = (navigate: any, email: string, password: string) => {
                     },
                 }
             )
-                .then((data) => data.json())
-                .then((data) => {
-                    if (data.access) {
-                        navigate("/blog");
-                        console.log(data);
-                        localStorage.setItem("access", data.access);
-                    }
-                });
-            let token = localStorage.getItem("access");
-            let data = await fetch(
-                "https://studapi.teachmeskills.by/auth/users/me/",
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
+            .then((data) => data.json())
+            .then((data) => {
+                if (data.access) {
+                    navigate("/blog");
+                    console.log(data);
+                    localStorage.setItem("access", data.access);
                 }
-            ).then((data) => data.json());
-            console.log(data);
+            });
         } catch (err) {
             console.log(err);
         } finally {

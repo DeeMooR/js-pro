@@ -7,7 +7,7 @@ import Input from 'src/components/Input'
 import Button from 'src/components/Button'
 import "./SignInUp.css"
 import { CREATE_USER, SIGN_IN } from 'src/actions/actions';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface ISignInUp {
     text: 'Sign Up' | 'Sign In',
@@ -33,7 +33,7 @@ const SignInUp: FC<ISignInUp> = ({ text }) => {
                 {text === 'Sign In' && <a href="#" className='forgot-password'>Forgot password?</a>}
                 {text === 'Sign Up' && <Button text={text} handleClick={() => dispatch(CREATE_USER({username: name, email, password}))} />}
                 {text === 'Sign In' && <Button text={text} handleClick={() => dispatch(SIGN_IN(navigate, email, password))} />}
-                <p className='have-account'>{text === 'Sign Up' ? 'Already' : 'Don\'t'} have an account? <a href="#">{text === 'Sign Up' ? 'Sign In' : 'Sign Up'}</a></p>
+                <p className='have-account'>{text === 'Sign Up' ? 'Already' : 'Don\'t'} have an account? <Link to={text === 'Sign Up' ? '/sign-in' : '/sign-up'} >{text === 'Sign Up' ? 'Sign In' : 'Sign Up'}</Link></p>
             </form>
         </PageTemplate>
     )
