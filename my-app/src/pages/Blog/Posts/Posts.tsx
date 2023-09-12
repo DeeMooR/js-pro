@@ -18,7 +18,7 @@ const Posts = () => {
         if (!posts.length) dispatch(FETCH_POSTS());
     }, []);
 
-    console.log(posts)
+    console.log(posts);
 
     return (
         <>

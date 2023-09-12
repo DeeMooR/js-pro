@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './Post.css'
@@ -23,12 +23,12 @@ const Post = ({obj, type}: {obj: IPost, type: 'page' | 'search' | 'big' | 'middl
     const isOpenImage = useSelector(({modalInfo}) => modalInfo.isOpenImage);
     const addLike = () => {
         if (!obj.isDislike) {
-            dispatch({type: 'SET_LIKE', payload: obj.id })
+            dispatch({type: 'SET_LIKE', payload: obj.id });
         }
     }
     const addDislike = () => {
         if (!obj.isLike) {
-            dispatch({type: 'SET_DISLIKE', payload: obj.id })
+            dispatch({type: 'SET_DISLIKE', payload: obj.id });
         } 
     }
 
@@ -53,6 +53,7 @@ const Post = ({obj, type}: {obj: IPost, type: 'page' | 'search' | 'big' | 'middl
                 <div className={`post-${type}__image`} onClick={!isOpenImage && type === 'page' ? () => dispatch({ type: 'TOGGLE_MODAL', payload: {id: obj.id, type: 'image'}}) : undefined}>
                     <img src={obj.image} alt="image" />
                 </div>
+                {type === 'page' && <div>Для PagePost не реализованы кнопки like, dislike, favorite</div>}
             </div>
 
             <div className={`post-${type}__icons post__icons`}>

@@ -16,7 +16,6 @@ interface ISlideBar {
 const SlideBar:FC<ISlideBar> = ({ clickMenu, type }) => {
     const userData = useSelector(({user}) => user);
     const theme = useSelector(({theme}) => theme);
-    console.log(clickMenu);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();

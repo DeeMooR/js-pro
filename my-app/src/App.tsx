@@ -23,12 +23,11 @@ const App = () => {
                     Authorization: `Bearer ${token}`,
                 },  
             }
-        ).then((response) => {
-            response.json().then((userData) => {
-                console.log(userData);
-                dispatch({ type: "SET_USER", payload: userData });
-            });
-        }); 
+        )
+        .then((response) => response.json())
+        .then((userData) => {
+            dispatch({ type: "SET_USER", payload: userData });
+        });
     });
     return (
         <>
@@ -45,7 +44,7 @@ const App = () => {
             <Route path='/blog/:id' element={<PagePost />} />
             <Route path='/home' element={<Home />} />
             <Route path='/success' element={<Success />} />
-            {/* Если такой ссфлки нет */}
+            {/* Если такой ссылки нет */}
             <Route path='*' element={<Navigate to='/blog'/>} />
         </Routes>
         {location.pathname === '/' && <Navigate to='/blog' />}

@@ -46,6 +46,26 @@ export const CREATE_USER = (payload: IUser) => {
     };
 };
 
+export const CREATE_PAGEPOST = (id: string) => {
+    return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+        dispatch({ type: "SET_LOADING" });
+
+        try {
+            let postData = await fetch(
+                `https://studapi.teachmeskills.by/blog/posts/${id}/`
+            )
+            .then((postData) => postData.json())
+            .then((postData) => {
+                dispatch({ type: "SET_PAGEPOST", payload: postData });
+            });
+        } catch (err) {
+            console.log(err);
+        } finally {
+            dispatch({ type: "SET_LOADING" });
+        }
+    };
+};
+
 export const ACTIVATE_USER = (navigate: any, uid: string, token: string) => {
     return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
         dispatch({ type: "SET_LOADING" });

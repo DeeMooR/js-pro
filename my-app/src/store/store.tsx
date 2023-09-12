@@ -12,6 +12,7 @@ const initialState = {
         id: null
     },
     posts: [],
+    pagePost: {},
     user: {
         username: '',
         email: '',
@@ -77,6 +78,18 @@ const rootReducer = (state = initialState, action: any) => {
                     addLike: false,
                     addDislike: false,
                 }))
+            };
+        }
+        case 'SET_PAGEPOST':  {
+            console.log(action.payload);
+            return {
+                ...state,
+                pagePost: {
+                    ...action.payload,
+                    isFavorite: false,
+                    addLike: false,
+                    addDislike: false,
+                }
             };
         }
         case 'SET_USER':  {
