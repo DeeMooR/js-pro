@@ -22,6 +22,7 @@ const SlideBar:FC<ISlideBar> = ({ clickMenu, type }) => {
 
     const logOut = (() => {
         localStorage.removeItem('access');
+        localStorage.removeItem('refresh');
         navigate('/sign-in');
     })
 

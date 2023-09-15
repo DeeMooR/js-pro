@@ -107,11 +107,12 @@ export const SIGN_IN = (navigate: any, email: string, password: string) => {
                 }
             )
             .then((data) => data.json())
-            .then((data) => {
-                if (data.access) {
+            .then(({access, refresh}) => {
+                if (access) {
                     navigate("/blog");
-                    console.log(data);
-                    localStorage.setItem("access", data.access);
+                    console.log({access, refresh});
+                    localStorage.setItem("access", access);
+                    localStorage.setItem("refresh", refresh);
                 }
             });
         } catch (err) {
