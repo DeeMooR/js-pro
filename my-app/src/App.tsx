@@ -6,11 +6,13 @@ import Success from './pages/Success';
 import PagePost from './pages/PagePost';
 import Blog from './pages/Blog';
 import Home from './pages/Home';
+import AddPost from './pages/AddPost';
 import ActivateUser from './components/ActivateUser';
 import './App.css'
 import { decodeJwt, expToMinutes, updateAccessToken } from './helpers';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import MyPosts from './pages/MyPosts';
 
 const App = () => {
     const location = useLocation();
@@ -33,19 +35,16 @@ const App = () => {
         }
     };
 
-    useEffect(() => {
-        let token = localStorage.getItem("access");
-        let response = fetch("https://studapi.teachmeskills.by/auth/users/me/",
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },  
-            }
-        )
-        .then((response) => response.json())
-        .then((userData) => {
-            dispatch({ type: "SET_USER", payload: userData });
-        });
+    let response = fetch("https://studapi.teachmeskills.by/auth/users/me/",
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },  
+        }
+    )
+    .then((response) => response.json())
+    .then((userData) => {
+        dispatch({ type: "SET_USER", payload: userData });
     });
 
     if (token) {
@@ -79,9 +78,12 @@ const App = () => {
                 </>
             )}
             <Route path='/blog' element={<Blog />} />
+            {/* <Route path='/blog/' element={<Blog />} /> */}
             <Route path='/blog/:id' element={<PagePost />} />
             <Route path='/home' element={<Home />} />
             <Route path='/success' element={<Success />} />
+            <Route path='/add-post' element={<AddPost />} />
+            <Route path='/my-posts' element={<MyPosts />} />
             {/* Если такой ссылки нет */}
             <Route path='*' element={<Navigate to='/blog'/>} />
         </Routes>

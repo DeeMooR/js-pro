@@ -12,6 +12,7 @@ const initialState = {
         id: null
     },
     posts: [],
+    myPosts: [],
     pagePost: {},
     user: {
         username: '',
@@ -73,6 +74,28 @@ const rootReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 posts: action.payload.map((post: IPost) => ({
+                    ...post,
+                    isFavorite: false,
+                    addLike: false,
+                    addDislike: false,
+                }))
+            };
+        }
+        case 'ADD_POSTS':  {
+            return {
+                ...state,
+                posts: [...state.posts, ...action.payload.map((post: IPost) => ({
+                    ...post,
+                    isFavorite: false,
+                    addLike: false,
+                    addDislike: false,
+                }))]
+            };
+        }
+        case 'SET_MY_POSTS':  {
+            return {
+                ...state,
+                myPosts: action.payload.map((post: IPost) => ({
                     ...post,
                     isFavorite: false,
                     addLike: false,

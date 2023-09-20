@@ -17,3 +17,11 @@ export interface IUser {
     email: string,
     password: string
 }
+
+export interface IAddPost {
+    image: string,
+    text: string,
+    lesson_num: number,
+    title: string,
+    description: string
+}

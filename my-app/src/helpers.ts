@@ -1,3 +1,5 @@
+import { IAddPost } from "./interfaces";
+
 const base64UrlDecode = (base64Url: string) => {
     const padding = '='.repeat((4 - (base64Url.length % 4)) % 4);
     const base64 = (base64Url + padding).replace(/-/g, '+').replace(/_/g, '/');
@@ -22,7 +24,6 @@ export const expToMinutes = (expTimestampInSeconds: number) => {
 
 export const updateAccessToken = () => {
     try {
-        console.log('ku');
         let refresh = localStorage.getItem('refresh');
         fetch(
             "https://studapi.teachmeskills.by/auth/jwt/refresh/",
@@ -42,6 +43,49 @@ export const updateAccessToken = () => {
                 console.log('Access token has been updated');
             }
         });
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export const addPost = (payload: IAddPost) => {
+
+    const formData = new FormData();
+    formData.append('image', payload.image);
+    formData.append('text', payload.text);
+    formData.append('lesson_num', payload.lesson_num.toString());
+    formData.append('title', payload.title);
+    formData.append('description', payload.description);
+    console.log(formData);
+
+    try {
+        let token = localStorage.getItem("access");
+        console.log(payload.image);
+        console.log(typeof payload.lesson_num);
+        // image=@2.jpg;type=image/jpeg
+        fetch(
+            "https://studapi.teachmeskills.by/blog/posts/",
+            {
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer ${token}`,
+                },
+            }
+        )
+        .then((data) => {
+            console.log(data);
+            return data.json();
+        })
+        // .then(({id}) => {
+        //     if (id) {
+        //         console.log(access);
+        //         localStorage.setItem("access", access);
+        //         console.log('Access token has been updated');
+        //     }
+        // });
     } catch (err) {
         console.log(err);
     }

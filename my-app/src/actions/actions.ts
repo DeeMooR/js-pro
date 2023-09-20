@@ -1,24 +1,25 @@
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { IUser } from "src/interfaces";
+import instance from "src/axiosConfig";
 
 export const FETCH_POSTS = () => {
     return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
         dispatch({ type: "SET_LOADING" });
 
         try {
-            let response = await fetch(
-                "https://studapi.teachmeskills.by/blog/posts/?limit=30"
-            );
-            let jsonPosts = await response.json();
-            let posts = jsonPosts.results;
-            dispatch({ type: "SET_POSTS", payload: posts });
-            return posts;
+            instance.get('/blog/posts/?limit=10')
+            .then((data) => {
+                const posts = data.data.results;
+                dispatch({ type: "SET_POSTS", payload: posts });
+            })
         } catch (err) {
             console.log(err);
         } finally {
             dispatch({ type: "SET_LOADING" });
         }
+
+
     };
 };
 
@@ -115,6 +116,32 @@ export const SIGN_IN = (navigate: any, email: string, password: string) => {
                     localStorage.setItem("refresh", refresh);
                 }
             });
+        } catch (err) {
+            console.log(err);
+        } finally {
+            dispatch({ type: "SET_LOADING" });
+        }
+    };
+};
+
+export const GET_MYPOSTS = () => {
+    return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+        dispatch({ type: "SET_LOADING" });
+        try {
+            let token = localStorage.getItem("access");
+            fetch(
+                "https://studapi.teachmeskills.by/blog/posts/my_posts/",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
+            .then((myposts) => myposts.json())
+            .then((myposts) => {
+                let posts = myposts.results;
+                dispatch({ type: "SET_MY_POSTS", payload: posts });
+            })
         } catch (err) {
             console.log(err);
         } finally {
