@@ -40,11 +40,8 @@ const PageTemplate:FC<IPageTemplate> = ({title, children, hasBack, hasPrevNext, 
             setSearchPosts(data.data.results);
         });
         if (search) navigate(`/blog/?search=${search}&limit=100`)
-        else navigate('/blog');
+        // else navigate('/blog');
     }, [search])
-
-    // https://studapi.teachmeskills.by/blog/posts/?search=Hel
-
 
     return (
         <StyledContainer theme={theme} className={theme === 'dark' ? 'dark' : ''}>
