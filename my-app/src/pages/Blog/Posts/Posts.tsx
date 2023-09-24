@@ -6,13 +6,17 @@ import './Posts.css'
 import { FETCH_POSTS } from 'src/actions/actions';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-
-
+import instance from 'src/axiosConfig';
+import ViewMore from 'src/components/ViewMore/ViewMore';
+import Sorting from 'src/components/Sorting';
+import { useNavigate } from 'react-router-dom';
 
 const Posts = () => {
+    const sortingValue = useSelector(({sorting}) => sorting);
     const navigation = useSelector(({navigation}) => navigation);
-    const posts = useSelector(({posts}) => posts);
+    let posts = useSelector(({posts}) => posts);
     const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+    const navigate = useNavigate();
     
     useEffect(() => {
         if (!posts.length) dispatch(FETCH_POSTS());
@@ -20,34 +24,71 @@ const Posts = () => {
 
     console.log(posts);
 
+    const showMore = () => {
+        instance.get(`/blog/posts/?limit=10&offset=${posts.length}`)
+        .then((data) => {
+            const posts = data.data.results;
+            dispatch({ type: "ADD_POSTS", payload: posts });
+        });
+        navigate(`/blog/?limit=10&offset=${posts.length}`);
+    }
+
+    useEffect(() => {
+        instance.get(`/blog/posts/?limit=10&sortBy=${sortingValue}`)
+        .then((data) => {
+            posts = data.data.results;
+        });
+        if (sortingValue !== 'none') navigate(`/blog/?limit=10&sortBy=${sortingValue}`);
+    }, [sortingValue]);
+
+    console.log(sortingValue);
+
+    posts = [
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 1,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 2,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 3,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 4,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 5,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 6,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 7,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 8,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 9,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 10,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 11,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 12,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 13,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 14,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 15,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 16,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 17,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 18,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
+    ];
+
     return (
         <>
         {!!posts.length &&
         <>
             {navigation === 'All' &&
-            <div className="flex-middle-small">
-                <div className="flex-middle">
-                    <div className="flex-middle__left">
-                        {posts.slice(0, 3).map((post: IPost, i: number) => <Post key={i} obj={post} type='middle' />)}
-                    </div>
-                    <div className="flex-middle__right">
-                        {posts.slice(3, 6).map((post: IPost, i: number) => <Post key={i} obj={post} type='middle' />)}
-                    </div>
+                <>
+                <div className="grid-container__all">
+                    {posts.map((post: IPost, i: number) => 
+                        <div className="grid-item">
+                            {(i % 4 === 0 || i % 4 === 1) ? <Post key={i} obj={post} type='middle' /> : <Post key={i} obj={post} type='small' /> }
+                        </div>
+                    )}
                 </div>
-                <div className="flex-small">
-                    {posts.slice(6, 11).map((post: IPost, i: number) => <Post key={i} obj={post} type='small' />)}
-                </div>
-            </div>
+                <ViewMore type='posts' />
+                </>
             }
             {navigation === 'My favorites' &&
-            <div className="flex">
+            <div className="grid-container">
                 {posts
                 .filter((post: IPost) => post.isFavorite)
                 .map((post: IPost, i: number) => <Post key={i} obj={post} type='middle' />)}
             </div>
             }
             {navigation === 'Popular' &&
-            <div className="flex">
+            <div className="grid-container">
                 {[...posts]
                 .sort((left: IPost, right: IPost) => right.lesson_num - left.lesson_num)
                 .slice(0, 10).map((post: IPost, i: number) => <Post key={i} obj={post} type='middle' />)}

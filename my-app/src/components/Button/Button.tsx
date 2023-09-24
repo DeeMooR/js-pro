@@ -4,12 +4,13 @@ import "./Button.css";
 interface ITitle {
     text: string,
     handleClick?: () => void,
+    style?: string,
     isReboot?: boolean
 }
 
-const Button: FC<ITitle> = ({ text, handleClick, isReboot }) => {
+const Button: FC<ITitle> = ({ text, handleClick, style, isReboot }) => {
     return (
-        <button className="custom-button" type={isReboot ? 'button' : undefined} onClick={handleClick}>
+        <button className={`custom-button ${style}`} type={isReboot ? 'button' : undefined} onClick={handleClick}>
             {text}
         </button>
     );

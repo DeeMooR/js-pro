@@ -127,15 +127,16 @@ export const SIGN_IN = (navigate: any, email: string, password: string) => {
 export const CREATE_POST = ({image, text, lesson_num, title, description}: IAddPost) => {
     return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
         dispatch({ type: "SET_LOADING" });
-        const data = new FormData();
-        data.append('image', image);
-        data.append('text', text);
-        data.append('lesson_num', lesson_num.toString());
-        data.append('title', title);
-        data.append('description', description);
+
+        const newPost = new FormData();
+        newPost.append('image', image);
+        newPost.append('text', text);
+        newPost.append('lesson_num', lesson_num.toString());
+        newPost.append('title', title);
+        newPost.append('description', description);
 
         try {
-            instance.post('/blog/posts/', data)
+            instance.post('/blog/posts/', newPost)
             .then((data) => {
             })
         } catch (err) {
@@ -152,7 +153,7 @@ export const GET_MYPOSTS = () => {
         try {
             let token = localStorage.getItem("access");
             fetch(
-                "https://studapi.teachmeskills.by/blog/posts/my_posts/?limit=100",
+                "https://studapi.teachmeskills.by/blog/posts/my_posts/?limit=10",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

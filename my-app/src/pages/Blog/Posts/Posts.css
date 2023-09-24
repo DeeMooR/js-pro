@@ -1,28 +1,19 @@
-.flex-middle-small {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+.grid-container__all {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
 }
-.flex-middle {
-    display: flex;
-    width: 66.66%;
-    gap: 20px;
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
 }
-.flex-middle__left {
-    width: 50%;
+.grid-item {
+    grid-column: span 1;
+    grid-row: span 1;
 }
-.flex-middle__right {
-    width: 50%;
-}
-.flex-small {
-    width: 33.33%;
-}
-
-.flex {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-.flex .post {
-    width: calc(50% - 10px);
+.grid-item:nth-child(4n + 1),
+.grid-item:nth-child(4n + 2) {
+    grid-column: span 1;
+    grid-row: span 2;
 }

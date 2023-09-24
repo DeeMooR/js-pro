@@ -20,7 +20,8 @@ const initialState = {
         id: null,
     },
     navigation: 'All',
-    isLoading: false
+    isLoading: false,
+    sorting: 'none',
 };
 
 const rootReducer = (state = initialState, action: any) => {
@@ -103,6 +104,17 @@ const rootReducer = (state = initialState, action: any) => {
                 }))
             };
         }
+        case 'ADD_MY_POSTS':  {
+            return {
+                ...state,
+                myPosts: [...state.myPosts, ...action.payload.map((post: IPost) => ({
+                    ...post,
+                    isFavorite: false,
+                    addLike: false,
+                    addDislike: false,
+                }))]
+            };
+        }
         case 'SET_PAGEPOST':  {
             console.log(action.payload);
             return {
@@ -147,6 +159,12 @@ const rootReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 navigation: action.payload,
+            };
+        }
+        case 'TOGGLE_SORTING':  {
+            return {
+                ...state,
+                sorting: action.payload,
             };
         }
         case 'SET_FAVORITE':  {

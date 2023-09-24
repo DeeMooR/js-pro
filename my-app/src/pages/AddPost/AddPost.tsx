@@ -8,7 +8,6 @@ import Input from "src/components/Input";
 import Button from "src/components/Button";
 import { CREATE_POST } from "src/actions/actions";
 import { Link, useNavigate } from "react-router-dom";
-import { addPost } from "src/helpers";
 
 import "./AddPost.css";
 
@@ -23,9 +22,7 @@ const AddPost = () => {
 
     const [images, setImages] = React.useState([]);
     const maxNumber = 69;
-
     const onChange = (imageList: any, addUpdateIndex: any) => {
-        // data for submit
         console.log(imageList, addUpdateIndex);
         setImages(imageList);
     };
@@ -43,52 +40,12 @@ const AddPost = () => {
                 <div className="flex-lesson-image">
                     <Input
                         type="text"
-                        label="Lesson_num"
-                        placeholder="Your Lesson_num"
+                        label="Lesson number"
+                        placeholder="Your Lesson number"
                         value={lesson_num}
                         handleChange={setLesson_num}
                     />
-                    {/* <Input type='file' label='File' placeholder='Your file' value={image} handleChange={setImage} /> */}
-
-                    <ImageUploading
-        multiple
-        value={images}
-        onChange={onChange}
-        maxNumber={maxNumber}
-        dataURLKey="data_url"
-      >
-        {({
-          imageList,
-          onImageUpload,
-          onImageRemoveAll,
-          onImageUpdate,
-          onImageRemove,
-          isDragging,
-          dragProps,
-        }) => (
-          // write your building UI
-          <div className="upload__image-wrapper">
-            <button
-              style={isDragging ? { color: 'red' } : undefined}
-              onClick={onImageUpload}
-              {...dragProps}
-            >
-              Click or Drop here
-            </button>
-            &nbsp;
-            <button onClick={onImageRemoveAll}>Remove all images</button>
-            {imageList.map((image, index) => (
-              <div key={index} className="image-item">
-                <img src={image['data_url']} alt="" width="100" />
-                <div className="image-item__btn-wrapper">
-                  <button onClick={() => onImageUpdate(index)}>Update</button>
-                  <button onClick={() => onImageRemove(index)}>Remove</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </ImageUploading>
+                    <Input type='file' label='File' placeholder='Your file' value={image} handleChange={setImage} />
                 </div>
                 <Input
                     type="text"
@@ -105,16 +62,17 @@ const AddPost = () => {
                     handleChange={setText}
                 />
                 <div className="add-post__buttons">
-                    {/* <a href="#" className='add-post__delete'>Delete post</a> */}
+                    <Link to="/add-post" className="delete-posts">
+                        Delete post
+                    </Link>
                     <Link to="/my-posts" className="my-posts">
                         My posts
                     </Link>
-                    <Button text="Cancel" />
+                    <Button text="Cancel" style='add-post__cancel' />
                     <Button
                         text="Add Post"
                         handleClick={() =>
-                            dispatch(
-                                CREATE_POST({
+                            dispatch(CREATE_POST({
                                     image,
                                     text,
                                     lesson_num,
