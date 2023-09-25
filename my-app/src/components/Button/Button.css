@@ -6,3 +6,16 @@
     color: #fff;
     font-size: 16px;
 }
+
+.add-post__cancel {
+    background-color: #777;
+}
+
+.view-more {
+    width: 25%;
+    display: block;
+    margin: 40px auto 20px;
+    padding: 10px 30px;
+    border: 1px solid #000;
+    font-size: 16px;
+}

@@ -13,10 +13,11 @@ import IconAccount from "src/icons/account-white.png"
 
 interface IHeader {
     onSearchChange: (newValue: string) => void,
-    type: 'authorized' | 'not authorized' | 'search'
+    type: 'authorized' | 'not authorized' | 'search',
+    search: string,
 }
 
-const Header:FC<IHeader> = ({ onSearchChange, type }) => {
+const Header:FC<IHeader> = ({ onSearchChange, type, search }) => {
     const userData = useSelector(({user}) => user);
     const theme = useSelector(({theme}) => theme);
     const [clickMenu, setClickMenu] = useState(false);
@@ -40,7 +41,7 @@ const Header:FC<IHeader> = ({ onSearchChange, type }) => {
 
             {type === 'search' ?
                 <>
-                <input ref={inputRef} className="header__input" type="text" placeholder='Search...' onChange={handleSearchChange} />
+                <input ref={inputRef} className="header__input" type="text" placeholder={`Search ${search} ...`} onChange={handleSearchChange} />
                 <StyledButtonLightBlue theme={theme} onClick={clickCross}>
                     <img src={IconCross} alt="cross" />
                 </StyledButtonLightBlue>

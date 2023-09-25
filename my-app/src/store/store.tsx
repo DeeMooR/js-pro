@@ -12,6 +12,7 @@ const initialState = {
         id: null
     },
     posts: [],
+    myPosts: [],
     pagePost: {},
     user: {
         username: '',
@@ -19,7 +20,9 @@ const initialState = {
         id: null,
     },
     navigation: 'All',
-    isLoading: false
+    isLoading: false,
+    sortingPosts: '',
+    sortingMyPosts: '',
 };
 
 const rootReducer = (state = initialState, action: any) => {
@@ -80,6 +83,39 @@ const rootReducer = (state = initialState, action: any) => {
                 }))
             };
         }
+        case 'ADD_POSTS':  {
+            return {
+                ...state,
+                posts: [...state.posts, ...action.payload.map((post: IPost) => ({
+                    ...post,
+                    isFavorite: false,
+                    addLike: false,
+                    addDislike: false,
+                }))]
+            };
+        }
+        case 'SET_MY_POSTS':  {
+            return {
+                ...state,
+                myPosts: action.payload.map((post: IPost) => ({
+                    ...post,
+                    isFavorite: false,
+                    addLike: false,
+                    addDislike: false,
+                }))
+            };
+        }
+        case 'ADD_MY_POSTS':  {
+            return {
+                ...state,
+                myPosts: [...state.myPosts, ...action.payload.map((post: IPost) => ({
+                    ...post,
+                    isFavorite: false,
+                    addLike: false,
+                    addDislike: false,
+                }))]
+            };
+        }
         case 'SET_PAGEPOST':  {
             console.log(action.payload);
             return {
@@ -124,6 +160,18 @@ const rootReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 navigation: action.payload,
+            };
+        }
+        case 'TOGGLE_SORTING_POSTS':  {
+            return {
+                ...state,
+                sortingPosts: action.payload,
+            };
+        }
+        case 'TOGGLE_SORTING_MY_POSTS':  {
+            return {
+                ...state,
+                sotringMyPosts: action.payload,
             };
         }
         case 'SET_FAVORITE':  {

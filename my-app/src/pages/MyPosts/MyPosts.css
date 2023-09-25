@@ -1,0 +1,16 @@
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.flex .post {
+    width: calc(50% - 10px);
+}
+
+.add-post {
+    display: block;
+    padding: 30px 0 0 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2835a1;
+}

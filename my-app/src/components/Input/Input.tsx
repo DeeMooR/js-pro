@@ -5,9 +5,9 @@ import { StyledSpan, StyledInput } from './styled'
 interface IInput {
     label: string,
     placeholder: string,
-    type: 'password' | 'email' | 'text',
-    value: string,
-    handleChange: Dispatch<SetStateAction<string>>
+    type: 'password' | 'email' | 'text' | 'file',
+    value: string | number,
+    handleChange: (e: any) => void,
 }
 
 const Input:FC<IInput> = ({label, placeholder, type, value, handleChange}) => {
@@ -16,7 +16,8 @@ const Input:FC<IInput> = ({label, placeholder, type, value, handleChange}) => {
     return (
         <div>
             <StyledSpan>{label}</StyledSpan>
-            <StyledInput theme={theme} type={type} placeholder={placeholder} value={value} onChange={(e) => handleChange(e.currentTarget.value)} />
+            <StyledInput theme={theme} type={type} placeholder={placeholder} value={value} 
+            onChange={typeof value === 'string' ? (e) => handleChange(e.currentTarget.value) : (e) => handleChange(parseInt(e.currentTarget.value))} />
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, useState} from 'react'
+import React, {FC, ReactNode, useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Header from '../Header'
@@ -9,6 +9,7 @@ import { StyledContainer } from './styled'
 import './PageTemplate.css'
 import { IPost } from 'src/interfaces';
 import Loader from '../Loader';
+import instance from 'src/axiosConfig';
 
 
 interface IPageTemplate {
@@ -29,17 +30,35 @@ const PageTemplate:FC<IPageTemplate> = ({title, children, hasBack, hasPrevNext, 
 
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
+  
+    const [searchPosts, setSearchPosts] = useState<IPost[]>([])
 
+    useEffect(() => {
+        instance.get(`/blog/posts/?search=${search}&limit=100`)
+        .then((data) => {
+            console.log(data);
+            setSearchPosts(data.data.results);
+        });
+        if (search) navigate(`/blog/?search=${search}&limit=100`)
+    }, [search])
+
+    useEffect(() => {
+        instance.get(`/blog/posts/?search=${search}&limit=100`)
+        .then((data) => {
+            console.log(data);
+            setSearchPosts(data.data.results);
+        });
+        if (search) navigate(`/blog/?search=${search}&limit=100`)
+    }, [search])
 
     return (
         <StyledContainer theme={theme} className={theme === 'dark' ? 'dark' : ''}>
-            <Header onSearchChange={(newValue) => setSearch(newValue)} type={type_header} />
+            <Header onSearchChange={(newValue) => setSearch(newValue)} type={type_header} search={title} />
             <main>
                 {hasBack && <a onClick={() => navigate('/blog')}>Back to home</a>}
                 <h1>{search ? `Search results '${search}'` : title}</h1>
                 {search ?
-                    posts.filter((value) => value.title.includes(search))
-                    .map((value, i) => <Post key={i} obj={value} type='search' />)
+                    searchPosts.map((value, i) => <Post key={i} obj={value} type='search' />)
                 : <div className='content'>{isLoading ? <Loader /> : children}</div>}
 
                 {hasPrevNext || search ?

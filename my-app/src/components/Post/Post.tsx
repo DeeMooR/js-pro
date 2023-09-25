@@ -40,6 +40,8 @@ const Post = ({obj, type}: {obj: IPost, type: 'page' | 'search' | 'big' | 'middl
         if (isOpenPost) dispatch({ type: 'TOGGLE_MODAL', payload: {id: obj.id, type: 'post'}})
     }
 
+console.log(obj);
+
     return (
         <article className={`post-${type} post`}>
            <div className={`post-${type}__main post__main`} onClick={!isOpenPost && type !== 'page' ? () => dispatch({ type: 'TOGGLE_MODAL', payload: {id: obj.id, type: 'post'}}) : undefined}>

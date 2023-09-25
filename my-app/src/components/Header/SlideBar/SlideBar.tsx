@@ -22,6 +22,7 @@ const SlideBar:FC<ISlideBar> = ({ clickMenu, type }) => {
 
     const logOut = (() => {
         localStorage.removeItem('access');
+        localStorage.removeItem('refresh');
         navigate('/sign-in');
     })
 
@@ -34,7 +35,8 @@ const SlideBar:FC<ISlideBar> = ({ clickMenu, type }) => {
             {type !== 'not authorized' &&
                 <>
                 <Link to='/blog' className="menu__blog">Blog</Link>
-                <a className="menu__add-post">Add post</a>
+                <Link to='/add-post' className="menu__blog">Add post</Link>
+                <Link to='/my-posts' className="menu__blog">My posts</Link>
                 </>
             }
             <div className="menu__toggle-theme">
