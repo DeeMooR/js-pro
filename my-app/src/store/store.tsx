@@ -21,7 +21,8 @@ const initialState = {
     },
     navigation: 'All',
     isLoading: false,
-    sorting: 'none',
+    sortingPosts: '',
+    sortingMyPosts: '',
 };
 
 const rootReducer = (state = initialState, action: any) => {
@@ -161,10 +162,16 @@ const rootReducer = (state = initialState, action: any) => {
                 navigation: action.payload,
             };
         }
-        case 'TOGGLE_SORTING':  {
+        case 'TOGGLE_SORTING_POSTS':  {
             return {
                 ...state,
-                sorting: action.payload,
+                sortingPosts: action.payload,
+            };
+        }
+        case 'TOGGLE_SORTING_MY_POSTS':  {
+            return {
+                ...state,
+                sotringMyPosts: action.payload,
             };
         }
         case 'SET_FAVORITE':  {

@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import './Sorting.css'
 
-const Sorting = () => {
-    const sortingValue = useSelector(({sorting}) => sorting);
+interface ISorting {
+    type: 'POSTS' | 'MY_POSTS'
+}
+
+const Sorting:FC<ISorting> = ({type}) => {
+    let sortingValue = useSelector(({sortingPosts, sortingMyPosts}) => (type === 'POSTS') ? sortingPosts : sortingMyPosts);
     const dispatch = useDispatch();
 
     const handleSorting = (event: any) => {
         const value = event.target.value;
-        dispatch({ type: 'TOGGLE_SORTING', payload: value})
+        dispatch({ type: `TOGGLE_SORTING_${type}`, payload: value})
     };
 
     return (

@@ -12,7 +12,7 @@ import Sorting from 'src/components/Sorting';
 import { useNavigate } from 'react-router-dom';
 
 const Posts = () => {
-    const sortingValue = useSelector(({sorting}) => sorting);
+    const sortingPosts = useSelector(({sortingPosts}) => sortingPosts);
     const navigation = useSelector(({navigation}) => navigation);
     let posts = useSelector(({posts}) => posts);
     const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
@@ -22,26 +22,19 @@ const Posts = () => {
         if (!posts.length) dispatch(FETCH_POSTS());
     }, []);
 
-    console.log(posts);
-
-    const showMore = () => {
-        instance.get(`/blog/posts/?limit=10&offset=${posts.length}`)
-        .then((data) => {
-            const posts = data.data.results;
-            dispatch({ type: "ADD_POSTS", payload: posts });
-        });
-        navigate(`/blog/?limit=10&offset=${posts.length}`);
-    }
-
     useEffect(() => {
-        instance.get(`/blog/posts/?limit=10&sortBy=${sortingValue}`)
-        .then((data) => {
-            posts = data.data.results;
-        });
-        if (sortingValue !== 'none') navigate(`/blog/?limit=10&sortBy=${sortingValue}`);
-    }, [sortingValue]);
+        if (navigation === 'All') {
+            instance.get(`/blog/posts/?limit=10&sortBy=${sortingPosts}`)
+            .then((data) => {
+                posts = data.data.results;
+            });
+            if (sortingPosts === 'none' || sortingPosts === '') navigate('/blog');
+            else navigate(`/blog/?limit=10&sortBy=${sortingPosts}`);
+        }
+    }, [sortingPosts]);
 
-    console.log(sortingValue);
+    console.log(posts);
+    console.log(sortingPosts);
 
     posts = [
         {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 1,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
@@ -70,6 +63,7 @@ const Posts = () => {
         <>
             {navigation === 'All' &&
                 <>
+                <Sorting type='POSTS' />
                 <div className="grid-container__all">
                     {posts.map((post: IPost, i: number) => 
                         <div className="grid-item">

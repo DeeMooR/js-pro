@@ -13,7 +13,7 @@ import Sorting from 'src/components/Sorting';
 import instance from 'src/axiosConfig';
 
 const MyPosts = () => {
-    const sortingValue = useSelector(({sorting}) => sorting);
+    const sortingMyPosts = useSelector(({sortingMyPosts}) => sortingMyPosts);
     let myPosts = useSelector(({myPosts}) => myPosts);
     const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
     const navigate = useNavigate();
@@ -23,21 +23,22 @@ const MyPosts = () => {
     },[]);
     
     useEffect(() => {
-        instance.get(`/blog/my_posts/?limit=10&sortBy=${sortingValue}`)
+        instance.get(`/blog/posts/my_posts/?limit=10&sortBy=${sortingMyPosts}`)
         .then((data) => {
             myPosts = data.data.results;
         });
-        if (sortingValue !== 'none') navigate(`/blog/?limit=10&sortBy=${sortingValue}`);
-    }, [sortingValue]);
+        if (sortingMyPosts === 'none' || sortingMyPosts === '') navigate('/my-posts');
+        else navigate(`/my-posts/?limit=10&sortBy=${sortingMyPosts}`);
+    }, [sortingMyPosts]);
 
-    console.log(sortingValue);
+    console.log(sortingMyPosts);
     console.log(myPosts);
  
     return (
         <>
         {!!myPosts.length &&
             <PageTemplate title='My Posts' hasBack type_header='authorized'>
-                <Sorting />
+                <Sorting type='MY_POSTS' />
                 <Link to='/add-post' className='add-post'>Add Post</Link>
                 <div className="flex">
                     {myPosts.map((post: IPost, i: number) => <Post key={i} obj={post} type='middle' />)}
