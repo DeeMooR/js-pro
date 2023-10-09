@@ -35,28 +35,7 @@ const Posts = () => {
 
     console.log(posts);
     console.log(sortingPosts);
-
-    posts = [
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 1,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 2,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 3,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 4,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 5,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 6,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 7,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 8,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 9,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 10,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 11,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 12,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 13,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 14,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 15,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 16,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 17,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-        {id: 70,image: 'img',text: 'ku',date: '24-09-23',lesson_num: 18,title: 'ku2',description: 'ku3',author: 26,isFavorite: false,isLike: false,isDislike: false},
-    ];
-
+    
     return (
         <>
         {!!posts.length &&

@@ -22,7 +22,7 @@ interface IPageTemplate {
 }
 
 const PageTemplate:FC<IPageTemplate> = ({title, children, hasBack, hasPrevNext, hasNumbers, type_header}) => {
-    const posts: IPost[] = useSelector(({posts}) => posts);
+    const myPosts: IPost[] = useSelector(({myPosts}) => myPosts);
     const theme = useSelector(({theme}) => theme);
     const isLoading = useSelector(({isLoading}) => isLoading);
     const isOpenPost = useSelector(({modalInfo}) => modalInfo.isOpenPost);
@@ -34,21 +34,20 @@ const PageTemplate:FC<IPageTemplate> = ({title, children, hasBack, hasPrevNext, 
     const [searchPosts, setSearchPosts] = useState<IPost[]>([])
 
     useEffect(() => {
-        instance.get(`/blog/posts/?search=${search}&limit=100`)
-        .then((data) => {
+        if (title === 'Blog') {
+            instance.get(`/blog/posts/?search=${search}&limit=100`)
+            .then((data) => {
             console.log(data);
             setSearchPosts(data.data.results);
-        });
-        if (search) navigate(`/blog/?search=${search}&limit=100`)
-    }, [search])
-
-    useEffect(() => {
-        instance.get(`/blog/posts/?search=${search}&limit=100`)
-        .then((data) => {
-            console.log(data);
-            setSearchPosts(data.data.results);
-        });
-        if (search) navigate(`/blog/?search=${search}&limit=100`)
+            });
+            if (search) navigate(`/blog/?search=${search}&limit=100`)
+        }
+        if (title === 'My Posts') {
+            const searchMyPosts = myPosts.filter(item => 
+                item.date.includes(search) || item.title.includes(search) || item.lesson_num === +search
+            );
+            setSearchPosts(searchMyPosts);
+        }
     }, [search])
 
     return (

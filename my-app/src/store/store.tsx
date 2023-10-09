@@ -171,7 +171,7 @@ const rootReducer = (state = initialState, action: any) => {
         case 'TOGGLE_SORTING_MY_POSTS':  {
             return {
                 ...state,
-                sotringMyPosts: action.payload,
+                sortingMyPosts: action.payload,
             };
         }
         case 'SET_FAVORITE':  {

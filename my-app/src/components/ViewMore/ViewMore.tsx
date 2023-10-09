@@ -11,11 +11,14 @@ interface IViewMore {
 
 const ViewMore:FC<IViewMore> = ({type}) => {
     let posts = useSelector(({posts, myPosts}) => (type === 'posts') ? posts : myPosts);
-
     const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+
+    let part = '';
+    if (type === 'posts') part = 'posts'
+    if (type === 'my_posts') part = 'posts/my_posts'
     
     const showMore = () => {
-        instance.get(`/blog/${type}/?limit=10&offset=${posts.length}`)
+        instance.get(`/blog/${part}/?limit=10&offset=${posts.length}`)
         .then((data) => {
             const newPosts = data.data.results;
             if (type === 'posts') dispatch({ type: "ADD_POSTS", payload: newPosts })
