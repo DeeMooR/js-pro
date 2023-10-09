@@ -22,7 +22,7 @@ const Sorting:FC<ISorting> = ({type}) => {
                 <option selected>none</option>
                 <option>date</option>
                 <option>title</option>
-                <option>text</option>
+                {type === 'POSTS' && <option>text</option>}
                 <option>lesson_num</option>
             </select>
         </div>

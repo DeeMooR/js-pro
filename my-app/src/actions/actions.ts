@@ -18,8 +18,6 @@ export const FETCH_POSTS = () => {
         } finally {
             dispatch({ type: "SET_LOADING" });
         }
-
-
     };
 };
 
@@ -151,19 +149,10 @@ export const GET_MYPOSTS = () => {
     return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
         dispatch({ type: "SET_LOADING" });
         try {
-            let token = localStorage.getItem("access");
-            fetch(
-                "https://studapi.teachmeskills.by/blog/posts/my_posts/?limit=10",
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            )
-            .then((myposts) => myposts.json())
-            .then((myposts) => {
-                let posts = myposts.results;
-                dispatch({ type: "SET_MY_POSTS", payload: posts });
+            instance.get('/blog/posts/my_posts/?limit=10')
+            .then((data) => {
+                const myPosts = data.data.results;
+                dispatch({ type: "SET_MY_POSTS", payload: myPosts });
             })
         } catch (err) {
             console.log(err);

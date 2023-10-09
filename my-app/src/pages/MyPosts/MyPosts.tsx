@@ -13,35 +13,38 @@ import Sorting from 'src/components/Sorting';
 import instance from 'src/axiosConfig';
 
 const MyPosts = () => {
-    const sortingMyPosts = useSelector(({sortingMyPosts}) => sortingMyPosts);
-    let myPosts = useSelector(({myPosts}) => myPosts);
+    let sortingMyPosts: string = useSelector(({sortingMyPosts}) => sortingMyPosts);
+    let myPosts: IPost[] = useSelector(({myPosts}) => myPosts);
+    let arrSort = [...myPosts];
     const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
-    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(GET_MYPOSTS());
     },[]);
-    
-    useEffect(() => {
-        instance.get(`/blog/posts/my_posts/?limit=10&sortBy=${sortingMyPosts}`)
-        .then((data) => {
-            myPosts = data.data.results;
-        });
-        if (sortingMyPosts === 'none' || sortingMyPosts === '') navigate('/my-posts');
-        else navigate(`/my-posts/?limit=10&sortBy=${sortingMyPosts}`);
-    }, [sortingMyPosts]);
 
-    console.log(sortingMyPosts);
-    console.log(myPosts);
- 
+    switch(sortingMyPosts) {
+        case '': case 'none': 
+            arrSort = [...myPosts]; 
+            break;
+        case 'date': 
+            arrSort = arrSort.sort((left: any, right: any) => {
+                    const dateA = new Date(left.date);
+                    const dateB = new Date(right.date);
+                    return dateA.getTime() - dateB.getTime();
+            }); 
+            break;
+        default: 
+            arrSort = arrSort.sort((left: any, right: any) => left[sortingMyPosts] - right[sortingMyPosts]);
+    }
+
     return (
         <>
-        {!!myPosts.length &&
-            <PageTemplate title='My Posts' hasBack type_header='authorized'>
+        {!!arrSort.length &&
+            <PageTemplate title='My Posts' hasBack type_header='search'>
                 <Sorting type='MY_POSTS' />
                 <Link to='/add-post' className='add-post'>Add Post</Link>
                 <div className="flex">
-                    {myPosts.map((post: IPost, i: number) => <Post key={i} obj={post} type='middle' />)}
+                    {arrSort.map((post: IPost, i: number) => <Post key={i} obj={post} type='middle' />)}
                 </div>
                 <ViewMore type='my_posts'/>
             </PageTemplate>
